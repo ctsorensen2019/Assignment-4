@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Details</title>
+</head>
+<body>
+    <!--Shows pokemon details. This file is from assignment 3 and is not necessary for assignment 4-->
+    <label><b>Pokemon Details:</b></label>
+    <br><br>
+    <% for (let iCount = 0; iCount < myPokemon.length; iCount++) { %>
+        <label><%= myPokemon[iCount].id %> - <%= myPokemon[iCount].description %> - <%= myPokemon[iCount].base_total %></label>
+        <br><br>
+    <% } %>
+    <br><br>
+</body>
+</html>

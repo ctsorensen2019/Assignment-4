@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Pokémon</title>
+  <style>
+    form {
+      width: 50%;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #F9F9F9;
+      font-size: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="checkbox"], input[type="radio"] {
+      width: auto;
+      margin-right: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45A049;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Edit Pokémon</h1>
+  <form action="/editPoke/<%= pokemon.id %>" method="POST">
+    <!-- Pokémon Description -->
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" value="<%= pokemon.description %>" required oninput="this.value = this.value.toUpperCase()">
+    <!-- Base Total -->
+    <label for="base_total">Base Total</label>
+    <input type="number" id="base_total" name="base_total" value="<%= pokemon.base_total %>" required>
+    <!-- Date Created -->
+    <label for="date_created">Date Created</label>
+    <input type="date" id="date_created" name="date_created" value="<%= pokemon.date_created.toISOString().split('T')[0] %>" required>
+    <!-- Active Pokémon (Checkbox) -->
+    <label for="active_poke">
+      <input type="checkbox" id="active_poke" name="active_poke" value="true" <%= pokemon.active_poke ? 'checked' : '' %>>
+      Active Pokémon
+    </label>
+    <!-- Gender (Radio Buttons) -->
+    <label>Gender</label>
+    <label>
+      <input type="radio" name="gender" value="M" <%= pokemon.gender === 'M' ? 'checked' : '' %>> Male
+    </label>
+    <label>
+      <input type="radio" name="gender" value="F" <%= pokemon.gender === 'F' ? 'checked' : '' %>> Female
+    </label>
+    <label>
+      <input type="radio" name="gender" value="U" <%= pokemon.gender === 'U' ? 'checked' : '' %>> Unknown
+    </label>
+    <!-- Pokémon Type -->
+    <label for="poke_type_id">Pokémon Type</label>
+    <select id="poke_type_id" name="poke_type_id">
+      <% poke_types.forEach(type => { %>
+        <option value="<%= type.id %>" <%= pokemon.poke_type_id === type.id ? 'selected' : '' %>>
+          <%= type.description %>
+        </option>
+      <% }) %>
+    </select>
+    <!-- Submit Button -->
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>
